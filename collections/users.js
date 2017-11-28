@@ -7,7 +7,7 @@ import { getTimeStamp } from './utils';
 
 const Schema = Mongoose.Schema;
 
-class User {
+class UserClass {
   // `fullName` becomes a virtual
   // get fullName() {
   //     return `${this.firstName} ${this.lastName}`;
@@ -21,13 +21,14 @@ class User {
   // getFullName() {
   //     return `${this.firstName} ${this.lastName}`;
   // }
-  // `findByFullName()` becomes a static
-  // static findByFullName(name) {
-  //     const firstSpace = name.indexOf(' ');
-  //     const firstName = name.split(' ')[0];
-  //     const lastName = firstSpace === -1 ? '' : name.substr(firstSpace + 1);
-  //     return this.findOne({ firstName, lastName });
-  // }
+  static check_email_exist(email) {
+    //check if email exist in db
+    return this.findOne({ email, is_deleted: false });
+  }
+  static check_contact_exist(number) {
+    //check if email exist in db
+    return this.findOne({ 'phone.number': number, is_deleted: false });
+  }
 }
 
 const UserSchema = new Schema({
@@ -61,6 +62,18 @@ const UserSchema = new Schema({
   updated_at: { type: Number, default: getTimeStamp }
 });
 
-UserSchema.loadClass(User);
+UserSchema.loadClass(UserClass);
+const User = Mongoose.model('User', UserSchema);
 
-export default Mongoose.model('user', UserSchema);
+// async function test() {
+//   try {
+//     let testE = await User.check_email_exist('test');
+//     console.log('test()', testE);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+
+// test();
+
+export default User;

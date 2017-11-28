@@ -6,7 +6,7 @@ import Inert from 'inert';
 import Vision from 'vision';
 import HapiSwagger from 'hapi-swagger';
 import Good from 'good';
-import Package from '../package.json';
+import Pack from '../package.json';
 import Main from './main';
 import Socket from './socket';
 
@@ -39,11 +39,14 @@ export default [
     register: HapiSwagger,
     options: {
       info: {
-        title: Package.description,
-        version: Package.version
+        title: Pack.name,
+        description: Pack.description,
+        version: Pack.version
       },
+      swaggerUI: false,
+      documentationPath: '/api/docs',
       pathPrefixSize: 4,
-      basePath: '/v1'
+      basePath: '/api'
     }
   },
 

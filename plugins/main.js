@@ -26,7 +26,7 @@ const Main = {
 };
 
 Main.register.attributes = {
-  name: 'index-route',
+  name: 'Main',
   version: '1.0.0'
 };
 

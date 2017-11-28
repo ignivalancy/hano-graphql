@@ -5,8 +5,9 @@
 import Hapi from 'hapi';
 import config from 'config';
 import Mongoose from 'mongoose';
+import Bluebird from 'bluebird';
 import plugins from './plugins';
-import routes from './routes';
+import api from './api';
 import logger from './utilities/logger';
 
 const app = config.get('app');
@@ -25,7 +26,7 @@ server.connection(
         additionalExposedHeaders: ['x-logintoken']
       }
     },
-    labels: ['rest']
+    labels: ['api']
   },
   {
     timeout: {
@@ -41,7 +42,7 @@ server.connection({
 });
 
 // configure all routes to server object.
-server.route(routes);
+server.route(api);
 
 // register PlugIn's and Start the server.
 server.register(plugins, function(err) {
@@ -65,10 +66,12 @@ const db = config.get('db');
 // Build the connection string.
 const mongoUrl = 'mongodb://' + db.host + ':' + db.port + '/' + db.name;
 
+Mongoose.Promise = Bluebird;
 // create DB connection.
 Mongoose.connect(mongoUrl, config.get('db.mongoose'), function(err) {
   if (err) {
     logger.error('+++ DB Error', err);
+
     // process.exit(1);
   } else {
     logger.info('+++ MongoDB Connected');
