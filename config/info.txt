@@ -1,0 +1,19 @@
+/*--------------------------------------------------------------------
+
+    * config of your app.
+
+---------------------------------------------------------------------*/
+
+Example exporting to the O/S before loading your app.
+
+cd /my/application
+export NODE_ENV=staging
+node myapp.js
+Example passing on the command line:
+
+cd /my/application
+NODE_ENV=stage node myapp.js 
+Example setting in JavaScript before the first load of node-config:
+
+process.env.NODE_ENV = "staging";
+var config = require('config');

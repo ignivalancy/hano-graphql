@@ -1,0 +1,49 @@
+/* eslint-disable */
+{
+  "app": {
+    "name": "hano",
+    "host": "127.0.0.1",
+    "port": 3005,
+    "socket": 3007,
+    "debug": true,
+    "logLevel": "debug",
+    "jwtAlgo": "HS512",
+    "jwtKey": "hano"
+  },
+  "db": {
+    "name": "hano",
+    "host": "127.0.0.1",
+    "username": "",
+    "password": "",
+    "port": 27017,
+    "mongoose": {
+      "useMongoClient": true,
+      "autoIndex": true, // Don't build indexes
+      "poolSize": 10, // Maintain up to 10 socket connections
+      // If not connected, return errors immediately rather than waiting for reconnect
+      "bufferMaxEntries": 0
+    }
+  },
+  "ios": {
+    "cert": "",
+    "key": "",
+    "gateway": "gateway.sandbox.push.apple.com",
+    "production": true
+  },
+  "android": {
+    "sender_id": "",
+    "api_key": ""
+  },
+  "twillio": {
+    "sid": "",
+    "token": "",
+    "number": ""
+  },
+  "smtp": {
+    "smtp_user": "",
+    "smtp_pass": "",
+    "smtp_port": 587, //25,
+    "smtpServer": "smtp.gmail.com",
+    "mailFrom": "Hano <notifications@hano.com>"
+  }
+}

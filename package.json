@@ -1,0 +1,77 @@
+{
+  "name": "hano",
+  "version": "1.0.0",
+  "description": "Hapi and Node Project For Scaleable Apps",
+  "engines": {
+    "node": ">=7.4.0",
+    "npm": ">=5.5.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ignivalancy/Hano.git"
+  },
+  "keywords": [
+    "node",
+    "hapi",
+    "js",
+    "socket",
+    "mongo"
+  ],
+  "bugs": {
+    "url": "https://github.com/ignivalancy/Hano/issues"
+  },
+  "homepage": "https://github.com/ignivalancy/Hano#readme",
+  "dependencies": {
+    "apn": "2.1.5",
+    "axios": "0.16.2",
+    "boom": "^6.0.0",
+    "config": "1.26.2",
+    "fcm-node": "1.2.0",
+    "glob": "7.1.2",
+    "good": "^7.3.0",
+    "good-console": "^6.4.0",
+    "good-squeeze": "^5.0.2",
+    "hapi": "^16.6.2",
+    "hapi-swagger": "8.0.0",
+    "http-status": "1.0.1",
+    "inert": "^4.2.1",
+    "joi": "13.0.1",
+    "jsonwebtoken": "8.1.0",
+    "lodash": "4.17.4",
+    "md5": "2.2.1",
+    "moment": "2.19.1",
+    "mongoose": "^4.12.4",
+    "nodemailer": "4.2.0",
+    "nodemailer-smtp-transport": "2.7.4",
+    "path": "^0.12.7",
+    "randomstring": "1.1.5",
+    "socket.io": "2.0.4",
+    "stripe": "5.1.1",
+    "twilio": "3.9.0",
+    "underscore": "1.8.3",
+    "vision": "^4.1.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "bunyan": "^2.0.2",
+    "eslint": "^4.11.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "husky": "^0.14.3",
+    "lint-staged": "^5.0.0",
+    "nodemon": "^1.12.1",
+    "prettier": "^1.8.2"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node -- server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reinstall": "rm -rf node_modules && npm install",
+    "precommit": "lint-staged",
+    "prettier": "prettier --write \"**/*.json\" \"**/*.js\" \"config/**/*.json\" \"collections/**/*.js\" \"controllers/**/*.js\" \"plugins/**/*.js\" \"routes/**/*.js\" \"services/**/*.js\" \"utilities/**/*.js\""
+  },
+  "author": "Lancy Goyal",
+  "license": "MIT"
+}
