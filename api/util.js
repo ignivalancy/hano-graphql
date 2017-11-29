@@ -4,7 +4,5 @@
 
 export const constructPath = function(obj) {
   let path = obj.path.split('/');
-  if (path[1] === this.match) return obj;
-  obj.path = `/${this.match}${obj.path}`;
-  return obj;
+  return path[1] === this.match ? { ...obj, path: `/${this.match}${obj.path}` } : obj;
 };
