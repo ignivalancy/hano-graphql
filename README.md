@@ -26,13 +26,16 @@ npm run start
 
 ### Folder structure
     .
+    ├── api                    # Rest api's folder
+    │   ├── v1
+    │   |  └── test            # Routes configration
+    │   |  └── index.js
     ├── config                 # Config Folder
     ├── controllers            # Controllers Folder
     ├── collections            # Collections Folder
     ├── plugins                # Plugins Folder
-    ├── routes                 # Routes Folder
     ├── services               # Services Folder
-    ├── utility                # Utility Folder
+    ├── utilities              # Utility Folder
     ├── server.js              # Main server file initiating hapi server
     └── package.json           # Node dependencies
 
