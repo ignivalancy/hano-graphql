@@ -10,10 +10,11 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-    indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'always'],
-    'prettier/prettier': ['error', null, '@prettier']
+    indent: [2, 2],
+    'linebreak-style': [2, 'unix'],
+    quotes: [2, 'single'],
+    semi: [2, 'always'],
+    'prettier/prettier': [2, null, '@prettier'],
+    properties: [1, 'always']
   }
 };

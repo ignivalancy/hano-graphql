@@ -2,7 +2,6 @@
    * @ description : This is the main startup server file to init the application.
 ---------------------------------------------------------------------------------- */
 
-import 'babel-polyfill';
 import Hapi from 'hapi';
 import config from 'config';
 import Mongoose from 'mongoose';
