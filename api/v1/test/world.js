@@ -1,7 +1,7 @@
 export default {
   method: 'GET',
-  path: '/world',
-  handler: function(request, reply) {
+  path: '/api/v1/test/world',
+  handler: async (request, reply) => {
     return reply('hello friend');
   }
 };

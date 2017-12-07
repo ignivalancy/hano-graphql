@@ -2,32 +2,35 @@
    * @ description : This file defines the user schema for mongodb.
 ----------------------------------------------------------------------- */
 
+import md5 from 'md5';
+import jwt from 'jsonwebtoken';
 import Mongoose from 'mongoose';
+import config from 'config';
 import { getTimeStamp } from './utils';
 
+const { jwtKey } = config.get('app');
 const Schema = Mongoose.Schema;
 
 class UserClass {
-  // `fullName` becomes a virtual
-  // get fullName() {
-  //     return `${this.firstName} ${this.lastName}`;
-  // }
-  // set fullName(v) {
-  //     const firstSpace = v.indexOf(' ');
-  //     this.firstName = v.split(' ')[0];
-  //     this.lastName = firstSpace === -1 ? '' : v.substr(firstSpace + 1);
-  // }
-  // `getFullName()` becomes a document method
-  // getFullName() {
-  //     return `${this.firstName} ${this.lastName}`;
-  // }
-  static check_email_exist(email) {
-    //check if email exist in db
-    return this.findOne({ email, is_deleted: false });
+  static checkEmail(email) {
+    return this.findOne({ email, isDeleted: false });
   }
-  static check_contact_exist(number) {
-    //check if email exist in db
-    return this.findOne({ 'phone.number': number, is_deleted: false });
+  static checkNumber(number) {
+    return this.findOne({ 'phone.number': number, isDeleted: false });
+  }
+  static checkPasswordToken(passwordToken) {
+    return this.findOne({ passwordToken });
+  }
+  static checkPassword(userId, password) {
+    return this.findOne({ $and: [{ _id: userId }, { password }] });
+  }
+  static requireLogin(token, role = 'user') {
+    try {
+      const decoded = jwt.verify(token, jwtKey);
+      return this.findOne({ 'loginToken.token': token, role });
+    } catch (err) {
+      return err;
+    }
   }
 }
 
@@ -42,14 +45,14 @@ const UserSchema = new Schema({
   role: { type: String, required: true }, // business, user, admin
   otp: { type: Number, default: 0 },
   description: { type: String, default: '' },
-  is_deleted: { type: Boolean, default: false },
+  isDeleted: { type: Boolean, default: false },
   logo: { type: String, default: '' },
   status: { type: Number, default: 0 }, // 0:pending, 1:active, 2:decline, 3:block
   verified: {
     token: { type: String, default: '' },
     status: { type: Boolean, default: false }
   },
-  login_token: {
+  loginToken: {
     token: { type: String, default: '' },
     when: { type: Number, default: getTimeStamp }
   },
@@ -57,23 +60,12 @@ const UserSchema = new Schema({
     token: { type: String, default: '' },
     type: { type: String, default: '' }
   },
-  last_login: { type: Number, default: getTimeStamp },
-  created_at: { type: Number, default: getTimeStamp },
-  updated_at: { type: Number, default: getTimeStamp }
+  lastLogin: { type: Number, default: getTimeStamp },
+  createdAt: { type: Number, default: getTimeStamp },
+  updatedAt: { type: Number, default: getTimeStamp }
 });
 
 UserSchema.loadClass(UserClass);
 const User = Mongoose.model('User', UserSchema);
-
-// async function test() {
-//   try {
-//     let testE = await User.check_email_exist('test');
-//     console.log('test()', testE);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
-// test();
 
 export default User;

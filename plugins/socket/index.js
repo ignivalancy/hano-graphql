@@ -10,19 +10,19 @@ import socketIO from 'socket.io';
 // import * as socketHandler from './handler';
 
 const Socket = {
-  register: function(server, options, next) {
+  register: (server, options, next) => {
     // Opening the socket connection
 
     let io = socketIO(server.select('ws').listener),
       users = {},
       sockets = {};
 
-    io.on('connection', function(socket) {
+    io.on('connection', socket => {
       let socket_id = socket.id;
       // console.log(socket_id)
 
       /** ******** on authenticate event registering user's socket id in user object and currently running instance *******/
-      socket.on('authenticate', function(query, callback) {
+      socket.on('authenticate', (query, callback) => {
         // let request = {
         //     token: query['x-logintoken'],
         //     socket_id: socket.id,
@@ -38,7 +38,7 @@ const Socket = {
       });
 
       /** *** on Disconnect event delete the current user socket id from user's object and delete the user's key/Value pair from the socket object *****/
-      socket.on('disconnect', function() {
+      socket.on('disconnect', () => {
         if (sockets[socket_id]) {
           delete users[sockets[socket_id].user_id];
           delete sockets[socket_id];
