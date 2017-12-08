@@ -13,7 +13,7 @@ const Socket = {
   register: (server, options, next) => {
     // Opening the socket connection
 
-    let io = socketIO(server.select('ws').listener),
+    let io = socketIO(server.select('socket').listener),
       users = {},
       sockets = {};
 
@@ -60,7 +60,7 @@ const Socket = {
 };
 
 Socket.register.attributes = {
-  name: 'sortie-socket-connection'
+  name: 'Socket'
 };
 
 export default Socket;

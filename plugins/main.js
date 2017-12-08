@@ -1,14 +1,15 @@
 /* ------------------------------------------------------------------------------------------------
-   * @ description : Here we are creating the custom plugIns according to the application need.
+   * @ description : Here we are creating the home page plugin.
 ------------------------------------------------------------------------------------------------- */
 
-import config from 'config';
+// import config from 'config';
 
-const { name, host, port } = config.get('app');
+// const { name, host, port } = config.get('app');
 
 const Main = {
   register: (server, options, next) => {
-    server.route({
+    const webServer = server.select('web');
+    webServer.route({
       method: 'GET',
       path: '/{p*}',
       handler: (request, reply) => {
@@ -26,8 +27,7 @@ const Main = {
 };
 
 Main.register.attributes = {
-  name: 'Main',
-  version: '1.0.0'
+  name: 'Main'
 };
 
 export default Main;

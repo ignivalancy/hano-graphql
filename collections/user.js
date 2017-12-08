@@ -12,11 +12,14 @@ const { jwtKey } = config.get('app');
 const Schema = Mongoose.Schema;
 
 class UserClass {
+  static checkUserName(username) {
+    return this.findOne({ username, isDeleted: false });
+  }
   static checkEmail(email) {
     return this.findOne({ email, isDeleted: false });
   }
-  static checkNumber(number) {
-    return this.findOne({ 'phone.number': number, isDeleted: false });
+  static checkNumber(phone) {
+    return this.findOne({ 'phone.number': phone.number, isDeleted: false });
   }
   static checkPasswordToken(passwordToken) {
     return this.findOne({ passwordToken });

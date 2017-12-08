@@ -20,9 +20,7 @@ export default nodemailer.createTransport(
 );
 
 export const subjects = {
-  userVerification: 'Sortie - Verify Email',
-  newUserApproval: 'Sortie - New User Approval',
-  newStaff: 'Sortie - Staff User',
-  forgetPassword: 'Sortie - Forget Password',
-  contactUs: 'Sortie - Contact Us'
+  userVerification: 'Verify Email',
+  forgetPassword: 'Forget Password',
+  contactUs: 'Contact Us'
 };

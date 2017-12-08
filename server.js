@@ -7,7 +7,6 @@ import config from 'config';
 import Mongoose from 'mongoose';
 import Bluebird from 'bluebird';
 import plugins from './plugins';
-import api from './api';
 import logger from './utilities/logger';
 
 const app = config.get('app');
@@ -26,7 +25,7 @@ server.connection(
         additionalExposedHeaders: ['x-logintoken']
       }
     },
-    labels: ['api']
+    labels: ['web', 'api']
   },
   {
     timeout: {
@@ -41,17 +40,14 @@ server.connection({
   labels: ['socket']
 });
 
-// configure all routes to server object.
-server.route(api);
-
-// register PlugIn's and Start the server.
-server.register(plugins, function(err) {
+// register Plugin's and Start the server.
+server.register(plugins, err => {
   // something bad happened loading the plugin.
   if (err) {
     throw err;
   }
   // start server after all PlugIns registration.
-  server.start(function(err) {
+  server.start(err => {
     if (err) {
       logger.error('+++ Error starting server', err);
       throw err;
@@ -68,10 +64,9 @@ const mongoUrl = 'mongodb://' + db.host + ':' + db.port + '/' + db.name;
 
 Mongoose.Promise = Bluebird;
 // create DB connection.
-Mongoose.connect(mongoUrl, config.get('db.mongoose'), function(err) {
+Mongoose.connect(mongoUrl, config.get('db.mongoose'), err => {
   if (err) {
     logger.error('+++ DB Error', err);
-
     // process.exit(1);
   } else {
     logger.info('+++ MongoDB Connected');

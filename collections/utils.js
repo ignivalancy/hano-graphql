@@ -3,5 +3,5 @@
 ----------------------------------------------------------------------- */
 
 export const getTimeStamp = () => {
-  return Date.now() / 1000;
+  return Date.now();
 };

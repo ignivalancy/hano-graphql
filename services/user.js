@@ -1,92 +1,25 @@
 /* -----------------------------------------------------------------------
-   * @ description : This is the user handler which will handle the user CRUD.
+   * @ description : This is the user service layer.
 ----------------------------------------------------------------------- */
 
-import md5 from 'md5';
-import jwt from 'jsonwebtoken';
-import path from 'path';
-import fs from 'fs';
-import _ from 'underscore';
-import util from 'util';
-import config from 'config';
 import User from '../collections/user';
-import logger from '../utilities/logger';
+import Messages from '../utilities/messages';
+import * as Universal from '../utilities/universal';
 
-const resolveAfter5Seconds = () => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve();
-    }, 5000);
-  });
+export const register = async payload => {
+  if (await User.checkUserName(payload.username)) throw new Error(Messages.userNameAlreadyExists);
+  if (await User.checkEmail(payload.email)) throw new Error(Messages.emailAlreadyExists);
+  if (await User.checkNumber(payload.phone)) throw new Error(Messages.contactAlreadyExists);
+  delete payload.type;
+  payload = {
+    ...payload,
+    password: Universal.encryptpassword(payload.password),
+    verified: { token: Universal.generateRandom(32) }
+  };
+  const data = await User(payload).save();
+  return;
 };
 
-export const register = async (request, reply) => {
-  console.log(new Date());
-  await resolveAfter5Seconds();
-  console.log(new Date());
-  return reply('register welcome');
-};
-
-// module.exports = {
-//   /*********** register new user **********/
-//   register: (params, callback) => {
-//     async.waterfall(
-//       [
-//         function(cb) {
-//           Utils.universalfunctions.check_email_exist(params.email, function(err, res) {
-//             if (err) {
-//               cb(err);
-//             } else if (res && res.length > 0) {
-//               cb(Utils.responses.emailAlreadyExists);
-//             } else {
-//               cb(null, params);
-//             }
-//           });
-//         },
-//         function(params, cb) {
-//           let phone =
-//             params.hasOwnProperty('phone') && params.phone.number != ''
-//               ? params.phone.number
-//               : null;
-//           Utils.universalfunctions.check_contact_exist(phone, function(err, res) {
-//             if (err) {
-//               cb(err);
-//             } else if (res && res.length > 0) {
-//               cb(Utils.responses.contactAlreadyExists);
-//             } else {
-//               cb(null, params);
-//             }
-//           });
-//         },
-//         function(data, cb) {
-//           delete data.type;
-//           data.password = Utils.universalfunctions.encryptpassword(data.password);
-//           data.device = { token: data.device_token, type: data.device_type };
-//           /********** save user object to database **********/
-//           Models.users(data).save(function(err, res) {
-//             if (err) {
-//               cb(err);
-//             } else {
-//               cb(null, res);
-//             }
-//           });
-//         },
-//         function(data, cb) {
-//           let queryObj = { _id: data._id },
-//             updateObj = {"verified.token": Utils.universalfunctions.generateRandomString(15,true)},
-//             options = { upsert: false, new: true };
-//           Models.users
-//             .findOneAndUpdate(queryObj, updateObj, options)
-//             .lean()
-//             .exec(function(err, res) {
-//               if (res) {
-//                 cb(null, res);
-//               } else {
-//                 cb(err || Utils.responses.systemError);
-//               }
-//             });
-//         },
-//         function(data, cb) {
 //           // send Verify Email.
 
 //           let response,
