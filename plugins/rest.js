@@ -2,18 +2,18 @@
    * @ description : Here we are creating the rest api's plugin.
 ------------------------------------------------------------------------------------------------- */
 
-import routes from '../api';
+import api from '../api';
 
-const Api = {
+const Rest = {
   register: (server, options, next) => {
     const apiServer = server.select('api');
-    apiServer.route(routes);
+    apiServer.route(api);
     next();
   }
 };
 
-Api.register.attributes = {
-  name: 'Api'
+Rest.register.attributes = {
+  name: 'Rest'
 };
 
-export default Api;
+export default Rest;

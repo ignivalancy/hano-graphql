@@ -2,9 +2,9 @@
    * @ description : This file defines socket handlers.
 ----------------------------------------------------------------------- */
 
-// import Joi from 'joi';
-import socketIO from 'socket.io';
+import SocketIO from 'socket.io';
 // import _ from 'underscore';
+import Messages from '../../utilities/events';
 // import eventEmitter from '../../utilities/events';
 // import logger from '../../utilities/logger';
 // import * as socketHandler from './handler';
@@ -13,44 +13,40 @@ const Socket = {
   register: (server, options, next) => {
     // Opening the socket connection
 
-    let io = socketIO(server.select('socket').listener),
+    let io = SocketIO(server.select('socket').listener),
       users = {},
       sockets = {};
 
     io.on('connection', socket => {
-      let socket_id = socket.id;
-      // console.log(socket_id)
+      let socketId = socket.id;
 
       /** ******** on authenticate event registering user's socket id in user object and currently running instance *******/
       socket.on('authenticate', (query, callback) => {
         // let request = {
-        //     token: query['x-logintoken'],
-        //     socket_id: socket.id,
+        //     token: query['x-logintoken']
         // };
-        let user_id = 'res._id';
-
+        let userId = 'user._id';
         // Socket local object instance contains user ids corresponding to socket ids
-        sockets[socket_id] = { user_id };
+        sockets[socketId] = { userId };
         // User local object instance contains socket ids corresponding to user ids and sorties
-        users[user_id] = { socket_id, sorties: [] };
+        users[userId] = { socketId };
 
-        callback(null, 'authorised');
+        callback(null, Messages.userAuthenticated);
       });
 
       /** *** on Disconnect event delete the current user socket id from user's object and delete the user's key/Value pair from the socket object *****/
       socket.on('disconnect', () => {
-        if (sockets[socket_id]) {
-          delete users[sockets[socket_id].user_id];
-          delete sockets[socket_id];
-          socket.disconnect('disconnected');
+        if (sockets[socketId]) {
+          delete users[sockets[socketId].userId];
+          delete sockets[socketId];
+          socket.disconnect('Disconnected');
         } else {
-          socket.disconnect('unauthorized');
+          socket.disconnect(Messages.tokenExpired);
         }
       });
     });
 
     // event handler which will happen in other part of the app
-
     // eventEmitter.on('someevent', function(data) {
     //     // Data Handler
     // });

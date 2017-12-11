@@ -2,6 +2,7 @@
    * @ description : This is the main startup server file to init the application.
 ---------------------------------------------------------------------------------- */
 
+import './utilities/global';
 import Hapi from 'hapi';
 import config from 'config';
 import Mongoose from 'mongoose';

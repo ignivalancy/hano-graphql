@@ -2,13 +2,9 @@
    * @ description : This file defines the user schema for mongodb.
 ----------------------------------------------------------------------- */
 
-import md5 from 'md5';
-import jwt from 'jsonwebtoken';
 import Mongoose from 'mongoose';
-import config from 'config';
-import { getTimeStamp } from './utils';
+import { getTimeStamp } from '../utilities/universal';
 
-const { jwtKey } = config.get('app');
 const Schema = Mongoose.Schema;
 
 class UserClass {
@@ -21,19 +17,47 @@ class UserClass {
   static checkNumber(phone) {
     return this.findOne({ 'phone.number': phone.number, isDeleted: false });
   }
-  static checkPasswordToken(passwordToken) {
-    return this.findOne({ passwordToken });
+  static checkToken(token) {
+    return this.findOne({ 'loginToken.token': token, isDeleted: false });
   }
-  static checkPassword(userId, password) {
-    return this.findOne({ $and: [{ _id: userId }, { password }] });
+  static register(payload) {
+    return this(payload).save();
   }
-  static requireLogin(token, role = 'user') {
-    try {
-      const decoded = jwt.verify(token, jwtKey);
-      return this.findOne({ 'loginToken.token': token, role });
-    } catch (err) {
-      return err;
+  static login(uniqId, password, type = 1) {
+    const role = type == 1 ? 'business' : type == 2 ? 'user' : 'admin';
+    return this.findOne({
+      $or: [{ username: uniqId }, { email: uniqId }, { 'phone.number': uniqId }],
+      password,
+      role,
+      isDeleted: false
+    });
+  }
+  static onLoginDone(userId, payload, loginToken) {
+    let updateData = {
+      $set: {
+        'device.type': payload.device ? payload.device.type : '',
+        'device.token': payload.device ? payload.device.token : '',
+        lastLogin: getTimeStamp(),
+        updatedAt: getTimeStamp()
+      }
+    };
+
+    if (payload.type == 2) {
+      updateData = { $set: { ...updateData.$set, loginToken: [{ token: loginToken }] } };
+    } else {
+      updateData = { ...updateData, $push: { loginToken: { token: loginToken } } };
     }
+    return this.findByIdAndUpdate(userId, updateData);
+  }
+  static logout(userId, token) {
+    let updateData = {
+      $set: {
+        'device.token': '',
+        updatedAt: getTimeStamp()
+      },
+      $pull: { loginToken: { token } }
+    };
+    return this.findByIdAndUpdate(userId, updateData);
   }
 }
 
@@ -55,15 +79,17 @@ const UserSchema = new Schema({
     token: { type: String, default: '' },
     status: { type: Boolean, default: false }
   },
-  loginToken: {
-    token: { type: String, default: '' },
-    when: { type: Number, default: getTimeStamp }
-  },
+  loginToken: [
+    {
+      token: { type: String, default: '' },
+      when: { type: Number, default: getTimeStamp }
+    }
+  ],
   device: {
     token: { type: String, default: '' },
     type: { type: String, default: '' }
   },
-  lastLogin: { type: Number, default: getTimeStamp },
+  lastLogin: { type: Number },
   createdAt: { type: Number, default: getTimeStamp },
   updatedAt: { type: Number, default: getTimeStamp }
 });

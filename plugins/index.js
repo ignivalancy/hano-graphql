@@ -7,7 +7,7 @@ import Vision from 'vision';
 import HapiSwagger from 'hapi-swagger';
 import Good from 'good';
 import Pack from '../package.json';
-import Api from './api';
+import Rest from './rest';
 import Main from './main';
 import Socket from './socket';
 
@@ -47,8 +47,8 @@ export default [
       swaggerUI: false,
       documentationPath: '/api/docs',
       expanded: 'full',
-      pathPrefixSize: 4,
-      basePath: '/api'
+      pathPrefixSize: 7,
+      basePath: '/api/v1'
     }
   },
 
@@ -91,7 +91,7 @@ export default [
             Restfull Api's.
         ---------------------------- */
   {
-    register: Api,
+    register: Rest,
     options: {}
   },
 

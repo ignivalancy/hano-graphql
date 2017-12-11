@@ -39,10 +39,10 @@
     "number": ""
   },
   "smtp": {
-    "smtp_user": "",
-    "smtp_pass": "",
-    "smtp_port": 587, //25,
-    "smtpServer": "smtp.gmail.com",
+    "smtpUser": "",
+    "smtpPass": "",
+    "smtpPort": 587, // 25,
+    "smtpServer": "",
     "mailFrom": "Hano <notifications@hano.com>"
   }
 }

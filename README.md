@@ -17,24 +17,24 @@ Hano - Hapi and Node Project For Scaleable Apps.
 
 ```
 npm install
-npm run start
+npm start
 ```
 
 ### Explore
 
-- [api's docs](/documentation)
+- [api's docs](/api/docs)
 
 ### Folder structure
     .
     ├── api                    # Rest api's folder
     │   ├── v1
-    │   |  └── test            # Routes configration
+    │   |  └── user            # User routes
     │   |  └── index.js
     ├── config                 # Config Folder
-    ├── controllers            # Controllers Folder
+    ├── controllers            # Controllers Folder For Api's
     ├── collections            # Collections Folder
     ├── plugins                # Plugins Folder
-    ├── services               # Services Folder
+    ├── services               # Services Folder For Api's
     ├── utilities              # Utility Folder
     ├── server.js              # Main server file initiating hapi server
     └── package.json           # Node dependencies

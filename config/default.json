@@ -30,8 +30,8 @@
     "production": true
   },
   "android": {
-    "sender_id": "",
-    "api_key": ""
+    "senderId": "",
+    "apiKey": ""
   },
   "twillio": {
     "sid": "",
@@ -39,9 +39,9 @@
     "number": ""
   },
   "smtp": {
-    "smtp_user": "",
-    "smtp_pass": "",
-    "smtp_port": 587, //25,
+    "smtpUser": "",
+    "smtpPass": "",
+    "smtpPort": 587, //25,
     "smtpServer": "smtp.gmail.com",
     "mailFrom": "Hano <notifications@hano.com>"
   }

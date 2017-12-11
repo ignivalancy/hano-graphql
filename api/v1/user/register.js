@@ -9,7 +9,7 @@ export default {
     description: 'Api service used to register a new user.',
     notes:
       '<br/>The request object should contain following fields in its <b>Payload/Body</b> object<br/>&bull; <b>User Name</b>: Should carry the space saperated User name of the user. If type 1 then there will be only 30 characters. If type 2, then there will bee 20 characters and with only lowercase & uppercase alphabets,no numeric. This is a required field.<br/>&bull;<b> Email</b>: Should be a valid email.<br/>&bull;<b> Password</b>: Containing atleast one alphabet and one number, 6 - 8 characters.<br/>&bull;<b> Contact Number</b>: Accepts an object containing country code(+ character with max 4 digit only) and phone number(Should contain 10 digit only). If type 2 then it is required otherwise not.<br/>&bull;<b> Role</b>: Should contains user role like business,user,admin.<br/>&bull;<b> Device Type</b>: Should contains type of device like ios,android. If type 2 then it is required otherwise not.<br/>&bull;<b> Device Token</b>: Should contains token of device. If type 2 then it is required otherwise not.<br/>&bull;<b> Type</b>: Should contains type of request like 1 for web user and 2 for app user.',
-    tags: ['api'],
+    tags: ['api', 'user'],
     validate: {
       payload: {
         username: Joi.when('type', {

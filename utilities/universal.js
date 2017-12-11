@@ -3,16 +3,17 @@
 ----------------------------------------------------------------------- */
 
 import md5 from 'md5';
-// import jwt from 'jsonwebtoken';
-// import path from 'path';
-// import fs from 'fs';
+import jwt from 'jsonwebtoken';
 // import _ from 'underscore';
-// import util from 'util';
-// import config from 'config';
+import config from 'config';
+
+export const getTimeStamp = () => {
+  return Date.now();
+};
 
 export const encryptpassword = request => md5(request);
 
-export const generateRandom = (length, alphanumeric = true) => {
+export const generateRandom = (length = 32, alphanumeric = true) => {
   let data = '',
     keys = '';
 
@@ -29,4 +30,7 @@ export const generateRandom = (length, alphanumeric = true) => {
   return data;
 };
 
-export const send_email = () => {};
+export const generateToken = data =>
+  jwt.sign(data, config.app.jwtKey, { algorithm: config.app.jwtAlgo });
+
+export const decodeToken = token => jwt.verify(token, config.app.jwtKey);
