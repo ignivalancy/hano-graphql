@@ -4,7 +4,7 @@ module.exports = {
     commonjs: true,
     es6: true
   },
-  extends: ['eslint:recommended', 'prettier'],
+  extends: ['standard', 'eslint:recommended', 'prettier'],
   plugins: ['prettier'],
   parserOptions: {
     sourceType: 'module'

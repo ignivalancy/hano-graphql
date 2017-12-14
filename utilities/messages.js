@@ -39,7 +39,7 @@ export default {
   contactUs: 'Your message has been sent successfully to admin.',
   otpVerified: 'OTP verified successfully.',
   userAuthenticated: 'User authenticated successfully.',
-  userNotVerified: "You haven't verify your account. Please verify to proceed.",
+  userNotVerified: 'You haven\'t verify your account. Please verify to proceed.',
   userBlocked: 'Your account has been blocked by Admin. Please contact admin for further queries.',
   verifyTokenSuccess: 'Your email has been successfully verified.',
   verifyTokenExpired: 'Token has been expired.'

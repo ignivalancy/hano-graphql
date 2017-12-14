@@ -4,8 +4,7 @@
 
 import Boom from 'boom';
 import User from '../collections/user';
-import { decodeToken } from './universal';
-import Messages from './messages';
+// import Messages from './messages';
 import logger from './logger';
 
 export const authorization = async (decoded, request, callback) => {

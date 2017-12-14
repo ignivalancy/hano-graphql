@@ -5,8 +5,8 @@
 import User from '../collections/user';
 import Messages from '../utilities/messages';
 import * as Universal from '../utilities/universal';
-import * as Mail from '../utilities/mail';
-import logger from '../utilities/logger';
+// import * as Mail from '../utilities/mail';
+// import logger from '../utilities/logger';
 
 export const register = async payload => {
   if (await User.checkUserName(payload.username)) throw new Error(Messages.userNameAlreadyExists);
