@@ -28,10 +28,10 @@ export const loginUser = async (request, reply) => {
 
 export const logoutUser = async (request, reply) => {
   const { payload } = request;
-  const { pre: { auth } } = request;
+  const { auth: { isAuthenticated, credentials: user, token } } = request;
   try {
-    const data = await logout(auth, payload);
-    reply(successAction(data, Messages.logoutSuccessfull));
+    const data = await logout({ user, token });
+    reply(successAction(null, Messages.logoutSuccessfull));
   } catch (error) {
     reply(failAction(error.message));
   }

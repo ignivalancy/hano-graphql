@@ -77,6 +77,6 @@ export const login = async payload => {
   };
 };
 
-export const logout = async auth => {
-  return await User.logout(auth.user._id, auth.token);
+export const logout = async payload => {
+  return await User.logout(payload.user._id, payload.token);
 };

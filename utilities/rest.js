@@ -8,24 +8,18 @@ import { decodeToken } from './universal';
 import Messages from './messages';
 import logger from './logger';
 
-export const authentication = async (request, reply) => {
-  // validate the request token
-  const token = request.headers['x-logintoken'];
-  try {
-    const decoded = decodeToken(token);
-    const user = await User.checkToken(token);
-    logger.info('authentication', user);
-    if (user) return reply({ user, token });
-    else return reply(failAction(Messages.tokenExpired)).takeover();
-  } catch (err) {
-    return reply(failAction(Messages.tokenExpired)).takeover();
-  }
+export const authorization = async (decoded, request, callback) => {
+  const token = request.headers['authorization'];
+  const user = await User.checkToken(token);
+  logger.info('authorization', decoded);
+  if (user) return callback(null, true, user);
+  else return callback(null, false);
 };
 
 export const successAction = (data, message = 'OK') => ({
   statusCode: 200,
   message,
-  data
+  data: data ? data : undefined
 });
 
 export const failAction = errorMessage => Boom.badRequest(errorMessage);

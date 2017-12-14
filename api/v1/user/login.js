@@ -6,6 +6,7 @@ export default {
   method: 'POST',
   path: '/api/v1/user/login',
   config: {
+    auth: false,
     description: 'Api service used to login user.',
     notes:
       '<br/>The request object should contain following fields in its <b>Payload/Body</b> object<br/>&bull;<b> Email</b>: Should be a valid email or valid phone number (10 digit with max 4 digit country code). <br/>&bull;<b> Password</b>: Containing atleast one alphabet and one number, 6 - 8 characters.<br/>&bull;<b> Device Type</b>: Should contains type of device like ios,android. If type 2 then it is required otherwise not.<br/>&bull;<b> Device Token</b>: Should contains token of device. If type 2 then it is required otherwise not.<br/>&bull;<b> Type</b>: Should contains type of request like 1 for buisness user, 2 for app user, 3 for staff user and 4 for admin user.',

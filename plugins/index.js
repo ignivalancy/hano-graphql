@@ -7,6 +7,7 @@ import Vision from 'vision';
 import HapiSwagger from 'hapi-swagger';
 import Good from 'good';
 import Pack from '../package.json';
+import Auth from './auth';
 import Rest from './rest';
 import Main from './main';
 import Socket from './socket';
@@ -76,6 +77,15 @@ export default [
         ]
       }
     }
+  },
+
+  /* ---------------------------
+            Setting up the jwt authentication.
+        ---------------------------- */
+  {
+    // register plugins to server instance.
+    register: Auth,
+    options: {}
   },
 
   /* ---------------------------

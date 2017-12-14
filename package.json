@@ -26,6 +26,7 @@
     "good-console": "^6.4.0",
     "good-squeeze": "^5.0.2",
     "hapi": "^16.6.2",
+    "hapi-auth-jwt2": "^7.3.0",
     "hapi-swagger": "8.0.0",
     "http-status": "1.0.1",
     "inert": "^4.2.1",

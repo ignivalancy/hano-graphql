@@ -31,6 +31,6 @@ export const generateRandom = (length = 32, alphanumeric = true) => {
 };
 
 export const generateToken = data =>
-  jwt.sign(data, config.app.jwtKey, { algorithm: config.app.jwtAlgo });
+  jwt.sign(data, config.app.jwtKey, { algorithm: config.app.jwtAlgo, expiresIn: '90d' });
 
 export const decodeToken = token => jwt.verify(token, config.app.jwtKey);

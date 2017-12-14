@@ -22,8 +22,8 @@ server.connection(
     routes: {
       cors: {
         origin: ['*'],
-        additionalHeaders: ['x-logintoken'],
-        additionalExposedHeaders: ['x-logintoken']
+        additionalHeaders: ['authorization'],
+        additionalExposedHeaders: ['authorization']
       }
     },
     labels: ['web', 'api']

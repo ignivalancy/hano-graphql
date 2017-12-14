@@ -47,7 +47,7 @@ class UserClass {
     } else {
       updateData = { ...updateData, $push: { loginToken: { token: loginToken } } };
     }
-    return this.findByIdAndUpdate(userId, updateData);
+    return this.findByIdAndUpdate(userId, updateData, { new: true });
   }
   static logout(userId, token) {
     let updateData = {
