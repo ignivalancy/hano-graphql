@@ -2,7 +2,7 @@
    * @ description : Here config all hapi plugIns and custom plugIns.
 ----------------------------------------------------------------------- */
 
-// import Inert from 'inert';
+import Inert from 'inert';
 // import Vision from 'vision';
 // import HapiSwagger from 'hapi-swagger';
 // import Good from 'good';
@@ -20,10 +20,10 @@ export default [
   /* -----------------------
             Register inert
          ------------------------ */
-  // {
-  //   plugin: Inert,
-  //   options: {}
-  // },
+  {
+    plugin: Inert,
+    options: {}
+  },
 
   /* -----------------------
             Register vision
