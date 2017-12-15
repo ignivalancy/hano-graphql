@@ -64,7 +64,7 @@ export default {
                   string: {
                     regex: {
                       base:
-                        'should be valid, country code following a \'+\' character wih only 4 digit'
+                        "should be valid, country code following a '+' character wih only 4 digit"
                     }
                   }
                 }

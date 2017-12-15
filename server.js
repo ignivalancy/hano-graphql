@@ -11,53 +11,55 @@ import plugins from './plugins';
 import logger from './utilities/logger';
 
 const app = config.get('app');
-const server = new Hapi.Server();
+// const server = new Hapi.Server();
 
 // creating REST API server connection.
 
-server.connection(
-  {
-    host: app.host,
-    port: app.port,
-    routes: {
-      cors: {
-        origin: ['*'],
-        additionalHeaders: ['authorization'],
-        additionalExposedHeaders: ['authorization']
-      }
-    },
-    labels: ['web', 'api']
-  },
-  {
-    timeout: {
-      server: 50000
-    }
-  }
-);
+// server.connection(
+//   {
+//     host: app.host,
+//     port: app.port,
+//     routes: {
+//       cors: {
+//         origin: ['*'],
+//         additionalHeaders: ['authorization'],
+//         additionalExposedHeaders: ['authorization']
+//       }
+//     },
+//     labels: ['web', 'api']
+//   },
+//   {
+//     timeout: {
+//       server: 50000
+//     }
+//   }
+// );
 
 // creating SOCKET server connection.
-server.connection({
-  port: app.socket,
-  labels: ['socket']
-});
+// server.connection({
+//   port: app.socket,
+//   labels: ['socket']
+// });
 
 // register Plugin's and Start the server.
-server.register(plugins, err => {
-  // something bad happened loading the plugin.
-  if (err) {
-    throw err;
-  }
-  // start server after all PlugIns registration.
-  server.start(err => {
-    if (err) {
-      logger.error('+++ Error starting server', err);
-      throw err;
-    } else {
-      logger.info('+++ SERVER STARTED');
-    }
+async function StartServer() {
+  const server = new Hapi.server({
+    host: app.host,
+    port: app.port
   });
-});
 
+  await server.register(plugins);
+
+  try {
+    await server.start();
+  } catch (err) {
+    console.log(`Error while starting server: ${err.message}`);
+  }
+
+  console.log(`Server running at: ${server.info.uri}`);
+}
+
+StartServer();
 // Connect to MongoDB
 const db = config.get('db');
 // Build the connection string.

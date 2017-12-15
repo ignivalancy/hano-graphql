@@ -1,6 +1,6 @@
 # Hano
 
-Hano - Hapi and Node Project For Scaleable Apps.
+GraphQL, Hapi and Node Project For Scaleable Apps.
 
 ### Includes
 - Node
