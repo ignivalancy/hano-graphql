@@ -2,15 +2,15 @@
    * @ description : Here config all hapi plugIns and custom plugIns.
 ----------------------------------------------------------------------- */
 
-import Inert from 'inert';
-import Vision from 'vision';
-import HapiSwagger from 'hapi-swagger';
-import Good from 'good';
-import Pack from '../package.json';
-import Auth from './auth';
-import Rest from './rest';
+// import Inert from 'inert';
+// import Vision from 'vision';
+// import HapiSwagger from 'hapi-swagger';
+// import Good from 'good';
+// import Pack from '../package.json';
+// import Auth from './auth';
+// import Rest from './rest';
 import Main from './main';
-import Socket from './socket';
+// import Socket from './socket';
 
 /**
  * exports array of plugins with configuration.
