@@ -9,7 +9,9 @@ import Messages from '../../utilities/events';
 // import logger from '../../utilities/logger';
 // import * as socketHandler from './handler';
 
-const Socket = {
+export default {
+  name: 'Socket',
+  version: '1.0.0',
   register: (server, options, next) => {
     // Opening the socket connection
 
@@ -54,9 +56,3 @@ const Socket = {
     next();
   }
 };
-
-Socket.register.attributes = {
-  name: 'Socket'
-};
-
-export default Socket;

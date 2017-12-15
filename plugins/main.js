@@ -2,32 +2,21 @@
    * @ description : Here we are creating the home page plugin.
 ------------------------------------------------------------------------------------------------- */
 
-// import config from 'config';
+import fs from 'fs';
+import path from 'path';
 
-// const { name, host, port } = config.get('app');
-
-const Main = {
-  register: (server, options, next) => {
-    const webServer = server.select('web');
-    webServer.route({
+export default {
+  name: 'Main',
+  version: '1.0.0',
+  register: (server, options) => {
+    server.route({
       method: 'GET',
       path: '/{p*}',
-      handler: (request, reply) => {
-        // return reply({
-        //   name: name,
-        //   endpoint: host,
-        //   port: port
-        // }).code(201);
-        return reply.file('main.html');
+      handler: (request, h) => {
+        const main = path.join(__dirname, '../main.html'),
+          html = fs.readFileSync(path.resolve(main), 'UTF-8');
+        return html;
       }
     });
-    // call next() to signal hapi that your plugin has done the job.
-    next();
   }
 };
-
-Main.register.attributes = {
-  name: 'Main'
-};
-
-export default Main;

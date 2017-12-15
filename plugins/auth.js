@@ -8,7 +8,9 @@ import { authorization } from '../utilities/rest';
 
 const { jwtAlgo, jwtKey } = config.get('app');
 
-const Auth = {
+export default {
+  name: 'Auth',
+  version: '1.0.0',
   register: (server, options, next) => {
     server.register(authJwt, err => {
       // something bad happened loading the plugin.
@@ -29,9 +31,3 @@ const Auth = {
     });
   }
 };
-
-Auth.register.attributes = {
-  name: 'Auth'
-};
-
-export default Auth;

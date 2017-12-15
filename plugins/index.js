@@ -20,97 +20,97 @@ export default [
   /* -----------------------
             Register inert
          ------------------------ */
-  {
-    register: Inert,
-    options: {}
-  },
+  // {
+  //   plugin: Inert,
+  //   options: {}
+  // },
 
   /* -----------------------
             Register vision
          ------------------------ */
-  {
-    register: Vision,
-    options: {}
-  },
+  // {
+  //   plugin: Vision,
+  //   options: {}
+  // },
 
   /* -----------------------
             Register Swagger
          ------------------------ */
 
-  {
-    register: HapiSwagger,
-    options: {
-      info: {
-        title: Pack.name,
-        description: Pack.description,
-        version: Pack.version
-      },
-      swaggerUI: false,
-      documentationPath: '/api/docs',
-      expanded: 'full',
-      pathPrefixSize: 7,
-      basePath: '/api/v1'
-    }
-  },
+  // {
+  //   plugin: HapiSwagger,
+  //   options: {
+  //     info: {
+  //       title: Pack.name,
+  //       description: Pack.description,
+  //       version: Pack.version
+  //     },
+  //     swaggerUI: false,
+  //     documentationPath: '/api/docs',
+  //     expanded: 'full',
+  //     pathPrefixSize: 7,
+  //     basePath: '/api/v1'
+  //   }
+  // },
 
   /* ------------------
             Register good
          ------------------ */
 
-  {
-    register: Good,
-    options: {
-      ops: {
-        interval: 1000
-      },
-      reporters: {
-        myConsoleReporter: [
-          {
-            module: 'good-squeeze',
-            name: 'Squeeze',
-            args: [{ log: '*', response: '*' }]
-          },
-          {
-            module: 'good-console'
-          },
-          'stdout'
-        ]
-      }
-    }
-  },
+  // {
+  //   plugin: Good,
+  //   options: {
+  //     ops: {
+  //       interval: 1000
+  //     },
+  //     reporters: {
+  //       myConsoleReporter: [
+  //         {
+  //           module: 'good-squeeze',
+  //           name: 'Squeeze',
+  //           args: [{ log: '*', response: '*' }]
+  //         },
+  //         {
+  //           module: 'good-console'
+  //         },
+  //         'stdout'
+  //       ]
+  //     }
+  //   }
+  // },
 
   /* ---------------------------
             Setting up the jwt authentication.
         ---------------------------- */
-  {
-    // register plugins to server instance.
-    register: Auth,
-    options: {}
-  },
+  // {
+  //   // register plugins to server instance.
+  //   plugin: Auth,
+  //   options: {}
+  // },
 
   /* ---------------------------
             Setting up the web-socket connection.
         ---------------------------- */
-  {
-    // register plugins to server instance.
-    register: Socket,
-    options: {}
-  },
+  // {
+  //   // register plugins to server instance.
+  //   plugin: Socket,
+  //   options: {}
+  // },
 
   /* ---------------------------
             Restfull Api's.
         ---------------------------- */
-  {
-    register: Rest,
-    options: {}
-  },
+  // {
+  //   plugin: Rest,
+  //   options: {}
+  // },
 
   /* ---------------------------
             Init the index route.
         ---------------------------- */
   {
     // register plugins to server instance.
-    register: Main,
+    plugin: Main,
     options: {}
   }
 ];
