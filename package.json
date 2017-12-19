@@ -9,20 +9,13 @@
     "type": "git",
     "url": "git+https://github.com/ignivalancy/Hano.git"
   },
-  "keywords": [
-    "node",
-    "hapi",
-    "js",
-    "socket",
-    "mongo"
-  ],
+  "keywords": ["node", "hapi", "js", "socket", "mongo"],
   "bugs": {
     "url": "https://github.com/ignivalancy/Hano/issues"
   },
   "homepage": "https://github.com/ignivalancy/Hano#readme",
   "dependencies": {
     "apn": "2.1.5",
-    "axios": "0.16.2",
     "bluebird": "^3.5.1",
     "boom": "^6.0.0",
     "config": "1.26.2",
@@ -31,7 +24,6 @@
     "good-console": "^6.4.0",
     "good-squeeze": "^5.0.2",
     "hapi": "^17.1.1",
-    "hapi-auth-jwt2": "^7.3.0",
     "hapi-swagger": "8.0.0",
     "http-status": "1.0.1",
     "inert": "^5.0.1",
@@ -44,12 +36,11 @@
     "nodemailer": "4.2.0",
     "nodemailer-smtp-transport": "2.7.4",
     "path": "^0.12.7",
-    "randomstring": "1.1.5",
     "socket.io": "2.0.4",
     "stripe": "5.1.1",
     "twilio": "3.9.0",
     "underscore": "1.8.3",
-    "vision": "^4.1.1"
+    "vision": "^5.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -76,7 +67,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "reinstall": "rm -rf node_modules && npm install",
     "precommit": "lint-staged",
-    "prettier": "prettier --write \"**/*.json\" \"**/*.js\" \"config/**/*.json\" \"collections/**/*.js\" \"controllers/**/*.js\" \"plugins/**/*.js\" \"routes/**/*.js\" \"services/**/*.js\" \"utilities/**/*.js\""
+    "prettier":
+      "prettier --write \"**/*.json\" \"**/*.js\" \"config/**/*.json\" \"collections/**/*.js\" \"controllers/**/*.js\" \"plugins/**/*.js\" \"routes/**/*.js\" \"services/**/*.js\" \"utilities/**/*.js\""
   },
   "author": "Lancy Goyal",
   "license": "MIT"

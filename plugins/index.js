@@ -3,12 +3,12 @@
 ----------------------------------------------------------------------- */
 
 import Inert from 'inert';
-// import Vision from 'vision';
+import Vision from 'vision';
 // import HapiSwagger from 'hapi-swagger';
 // import Good from 'good';
-// import Pack from '../package.json';
-// import Auth from './auth';
-// import Rest from './rest';
+import Pack from '../package.json';
+import Auth from './auth';
+import Rest from './rest';
 import Main from './main';
 // import Socket from './socket';
 
@@ -28,10 +28,10 @@ export default [
   /* -----------------------
             Register vision
          ------------------------ */
-  // {
-  //   plugin: Vision,
-  //   options: {}
-  // },
+  {
+    plugin: Vision,
+    options: {}
+  },
 
   /* -----------------------
             Register Swagger
@@ -82,17 +82,15 @@ export default [
   /* ---------------------------
             Setting up the jwt authentication.
         ---------------------------- */
-  // {
-  //   // register plugins to server instance.
-  //   plugin: Auth,
-  //   options: {}
-  // },
+  {
+    plugin: Auth,
+    options: {}
+  },
 
   /* ---------------------------
             Setting up the web-socket connection.
         ---------------------------- */
   // {
-  //   // register plugins to server instance.
   //   plugin: Socket,
   //   options: {}
   // },
@@ -100,16 +98,15 @@ export default [
   /* ---------------------------
             Restfull Api's.
         ---------------------------- */
-  // {
-  //   plugin: Rest,
-  //   options: {}
-  // },
+  {
+    plugin: Rest,
+    options: {}
+  },
 
   /* ---------------------------
             Init the index route.
         ---------------------------- */
   {
-    // register plugins to server instance.
     plugin: Main,
     options: {}
   }
