@@ -4,16 +4,10 @@
 
 import api from '../api';
 
-const Rest = {
-  register: (server, options, next) => {
-    const apiServer = server.select('api');
-    apiServer.route(api);
-    next();
+export default {
+  name: 'Rest',
+  version: '1.0.0',
+  register: (server, options) => {
+    server.route(api);
   }
 };
-
-Rest.register.attributes = {
-  name: 'Rest'
-};
-
-export default Rest;

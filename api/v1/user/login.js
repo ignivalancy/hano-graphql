@@ -48,7 +48,7 @@ export default {
           .label('Device Info'),
         type: Joi.number()
           .required()
-          .valid(1, 2, 3) // 1 for business user, 2 for appUser, 3 for admin user
+          .valid(1, 2, 3) // 1 for business, 2 for user, 3 for admin
       },
       failAction: failActionJoi
     }
