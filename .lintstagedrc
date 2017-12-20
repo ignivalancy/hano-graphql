@@ -1,5 +1,6 @@
 {
     "**/*.{js}": [
+      "prettier --write \"**/*.json\" \"**/*.js\" \"config/**/*.json\" \"collections/**/*.js\" \"controllers/**/*.js\" \"plugins/**/*.js\" \"routes/**/*.js\" \"services/**/*.js\" \"utilities/**/*.js\"",
       "./node_modules/.bin/eslint --quiet --ext .js .",
       "git add"
     ]

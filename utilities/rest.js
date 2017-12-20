@@ -3,16 +3,26 @@
 ----------------------------------------------------------------------- */
 
 import Boom from 'boom';
+import config from 'config';
+import jwt from 'jsonwebtoken';
 import User from '../collections/user';
-// import Messages from './messages';
+import Messages from './messages';
 import logger from './logger';
 
-export const authorization = async (decoded, request, callback) => {
+const { jwtKey } = config.get('app');
+
+export const authorization = async (request, h) => {
   const token = request.headers['authorization'];
-  const user = await User.checkToken(token);
+  let decoded = {};
+  try {
+    decoded = jwt.verify(token, jwtKey);
+  } catch (err) {
+    throw Boom.unauthorized(Messages.tokenExpired);
+  }
   logger.info('authorization', decoded);
-  if (user) return callback(null, true, user);
-  else return callback(null, false);
+  const user = await User.checkToken(token);
+  if (user) return h.authenticated({ credentials: { user, token } });
+  else throw Boom.unauthorized(Messages.unauthorizedUser);
 };
 
 export const successAction = (data, message = 'OK') => ({
@@ -21,9 +31,12 @@ export const successAction = (data, message = 'OK') => ({
   data: data ? data : undefined
 });
 
-export const failAction = errorMessage => Boom.badRequest(errorMessage);
+export const failAction = errorMessage => {
+  throw Boom.badRequest(errorMessage);
+};
 
-export const failActionJoi = (request, reply, source, error) => {
+export const failActionJoi = (request, h, error) => {
+  console.log(request);
   let errorMessage = '';
   if (error.output.payload.message.indexOf('[') > -1) {
     errorMessage = error.output.payload.message.substr(error.output.payload.message.indexOf('['));
@@ -35,5 +48,5 @@ export const failActionJoi = (request, reply, source, error) => {
   errorMessage = errorMessage.replace(']', '');
   error.output.payload.message = errorMessage;
   delete error.output.payload.validation;
-  return reply(Boom.badRequest(errorMessage));
+  throw Boom.badRequest(errorMessage);
 };
