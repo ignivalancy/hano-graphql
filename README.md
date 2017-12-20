@@ -3,8 +3,9 @@
 Hapi and Node Project For Scaleable Apps.
 
 ### Includes
+
 - Node
-- Hapi
+- Hapi v17
 - Swagger
 - Socket.io
 - Mongoose
@@ -20,11 +21,8 @@ npm install
 npm start
 ```
 
-### Explore
-
-- [api's docs](/api/docs)
-
 ### Folder structure
+
     .
     ├── api                    # Rest api's folder
     │   ├── v1
@@ -36,11 +34,13 @@ npm start
     ├── plugins                # Plugins Folder
     ├── services               # Services Folder For Api's
     ├── utilities              # Utility Folder
-    ├── server.js              # Main server file initiating hapi server
+    ├── main.js                # Main server file initiating hapi server
     └── package.json           # Node dependencies
 
 ### Learn more
 
-- [Hapi docs](https://hapijs.com)
-- [Mongoose docs](http://mongoosejs.com/docs/guide.html)
-- [Socket.io docs](https://socket.io/docs/)
+- [Hapi](https://hapijs.com)
+- [Hapi Api Docs](https://github.com/hapijs/hapi/blob/master/API.md)
+- [Mongoose Guide](http://mongoosejs.com/docs/guide.html)
+- [Socket.io Docs](https://socket.io/docs/)
+- [Es6 Cheatsheet](https://github.com/DrkSephy/es6-cheatsheet/blob/master/README.md)
