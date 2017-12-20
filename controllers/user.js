@@ -5,6 +5,7 @@
 import { register, login, logout } from '../services/user';
 import { failAction, successAction } from '../utilities/rest';
 import Messages from '../utilities/messages';
+// import logger from '../utilities/logger';
 
 export const registerUser = async (request, h) => {
   const { payload } = request;

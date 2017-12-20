@@ -4,13 +4,14 @@
 
 import Inert from 'inert';
 import Vision from 'vision';
-// import HapiSwagger from 'hapi-swagger';
-// import Good from 'good';
+import Swagger from 'hapi-swaggered';
+import SwaggerUI from 'hapi-swaggered-ui';
+import Good from 'good';
 import Pack from '../package.json';
 import Auth from './auth';
 import Rest from './rest';
 import Main from './main';
-// import Socket from './socket';
+import Socket from './socket';
 
 /**
  * exports array of plugins with configuration.
@@ -18,69 +19,89 @@ import Main from './main';
  */
 export default [
   /* -----------------------
-            Register inert
-         ------------------------ */
+        Register inert
+      ------------------------ */
   {
     plugin: Inert,
     options: {}
   },
 
   /* -----------------------
-            Register vision
-         ------------------------ */
+        Register vision
+      ------------------------ */
   {
     plugin: Vision,
     options: {}
   },
 
   /* -----------------------
-            Register Swagger
-         ------------------------ */
+        Register Swagger
+      ------------------------ */
 
-  // {
-  //   plugin: HapiSwagger,
-  //   options: {
-  //     info: {
-  //       title: Pack.name,
-  //       description: Pack.description,
-  //       version: Pack.version
-  //     },
-  //     swaggerUI: false,
-  //     documentationPath: '/api/docs',
-  //     expanded: 'full',
-  //     pathPrefixSize: 7,
-  //     basePath: '/api/v1'
-  //   }
-  // },
+  {
+    plugin: Swagger,
+    options: {
+      tags: {
+        api: Pack.description
+      },
+      info: {
+        title: Pack.name,
+        description: Pack.description,
+        version: Pack.version
+      }
+    }
+  },
+
+  /* -----------------------
+        Register SwaggerUI
+      ------------------------ */
+
+  {
+    plugin: SwaggerUI,
+    options: {
+      title: Pack.name,
+      path: '/api/docs',
+      authorization: {
+        field: 'authorization',
+        scope: 'header', // header works as well
+        // valuePrefix: 'bearer '// prefix incase
+        defaultValue: 'token',
+        placeholder: 'Enter your authorization token here'
+      },
+      swaggerOptions: {
+        docExpansion: 'list'
+      }
+    }
+  },
 
   /* ------------------
-            Register good
-         ------------------ */
+        Register good
+      ------------------ */
 
-  // {
-  //   plugin: Good,
-  //   options: {
-  //     ops: {
-  //       interval: 1000
-  //     },
-  //     reporters: {
-  //       myConsoleReporter: [
-  //         {
-  //           module: 'good-squeeze',
-  //           name: 'Squeeze',
-  //           args: [{ log: '*', response: '*' }]
-  //         },
-  //         {
-  //           module: 'good-console'
-  //         },
-  //         'stdout'
-  //       ]
-  //     }
-  //   }
-  // },
+  {
+    plugin: Good,
+    options: {
+      ops: {
+        interval: 1000
+      },
+      reporters: {
+        myConsoleReporter: [
+          {
+            module: 'good-squeeze',
+            name: 'Squeeze',
+            args: [{ log: '*', response: '*' }]
+          },
+          {
+            module: 'good-console'
+          },
+          'stdout'
+        ]
+      }
+    }
+  },
 
   /* ---------------------------
-            Setting up the jwt authentication.
+          Setting up the jwt authentication.
         ---------------------------- */
   {
     plugin: Auth,
@@ -88,24 +109,24 @@ export default [
   },
 
   /* ---------------------------
-            Setting up the web-socket connection.
-        ---------------------------- */
-  // {
-  //   plugin: Socket,
-  //   options: {}
-  // },
+        Setting up the web-socket connection.
+      ---------------------------- */
+  {
+    plugin: Socket,
+    options: {}
+  },
 
   /* ---------------------------
-            Restfull Api's.
-        ---------------------------- */
+        Restfull Api's.
+      ---------------------------- */
   {
     plugin: Rest,
     options: {}
   },
 
   /* ---------------------------
-            Init the index route.
-        ---------------------------- */
+        Init the index route.
+      ---------------------------- */
   {
     plugin: Main,
     options: {}
