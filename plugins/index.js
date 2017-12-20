@@ -10,6 +10,7 @@ import Pack from '../package.json';
 import Auth from './auth';
 import Rest from './rest';
 import Main from './main';
+import schema from './schema';
 
 /**
  * exports array of plugins with configuration.
