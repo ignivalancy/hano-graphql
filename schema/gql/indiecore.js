@@ -1,5 +1,4 @@
-import { Meteor } from 'meteor/meteor';
-import { HTTP } from 'meteor/http';
+import axios from 'axios';
 
 export const typeDefs = `
                 # Business List
@@ -31,21 +30,22 @@ export const typeDefs = `
 
 export const resolvers = {
   Query: {
-    business(root, { longitude, latitude, sort = '0', offset = '0' }, context) {
-      const { data } = HTTP.post(`http://indiecorelive.ignivastaging.com/api/v1/business/records`, {
-        data: {
-          userId: 'J2iyEjdeP5iikLy6q',
-          token: 'noy1OssDlGIUwfHVVAHlfhbQUp-nstPVWZPxUHIUfjm',
+    async business(root, { longitude, latitude, sort = '0', offset = '0' }, context) {
+      const { data } = await axios.post(
+        `http://indiecore.ignivadigital.net/api/v1/business/records`,
+        {
+          userId: 'ogLXurwhuFpw4qj6x',
+          token: 'RJuNYkab5G4ocWNSzOhEBcpgcqr2dyUFKIny7Ppib4E',
           longitude,
           latitude,
           sort,
           offset
         }
-      });
+      );
 
       if (data.success) return data;
 
-      throw new Meteor.Error('query-failed', data.error_text);
+      throw new Error(data.error_text);
     }
   },
   Business: {

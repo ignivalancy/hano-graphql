@@ -7,13 +7,10 @@ import * as json from './gql/json';
 // **** Schema
 import * as hello from './gql/hello';
 import * as book from './gql/book';
-// import response from './gql/response';
-// import categories from './gql/categories';
-// import tasks from './gql/tasks';
-// import indiecore from './gql/indiecore';
-// import user from './gql/user';
+import * as indiecore from './gql/indiecore';
+// import * as user from './gql/user';
 
-const { typeDefs, resolvers } = mergeModules([date, json, hello, book]);
+const { typeDefs, resolvers } = mergeModules([date, json, hello, book, indiecore]);
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
