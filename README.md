@@ -7,6 +7,8 @@ GraphQL, Hapi and Node Project For Scaleable Apps.
 - Node
 - Hapi v17
 - Apollo GraphQL
+- Subscriptions
+- GraphiQL
 - Prettier
 - Husky
 - ES-Next
@@ -30,6 +32,9 @@ npm start
     ├── controllers            # Controllers Folder For Api's
     ├── collections            # Collections Folder
     ├── plugins                # Plugins Folder
+    ├── schema                 # Schema Setup
+    │   ├── gql                # GraphQL Folder
+    │   |  └── index.js
     ├── services               # Services Folder For Api's
     ├── utilities              # Utility Folder
     ├── main.js                # Main server file initiating hapi server
