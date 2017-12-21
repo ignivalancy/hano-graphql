@@ -1,5 +1,3 @@
-import { Meteor } from 'meteor/meteor';
-
 export const typeDefs = `
                 # Defines a user profile type and its fields
                 type UserProfile {
@@ -32,14 +30,7 @@ export const resolvers = {
   },
   Mutation: {
     async updateProfile(root, args, { userId }) {
-      if (userId) {
-        let user = Meteor.users.findOne(userId);
-        let profile = { ...user.profile, ...args };
-        Meteor.users.update(user._id, { $set: { profile } });
-        return { success: true };
-      } else {
-        throw new Meteor.Error('permission-denied', 'Insufficient rights for this action.');
-      }
+      return { success: true };
     }
   }
 };

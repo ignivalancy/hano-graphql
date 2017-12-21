@@ -5,6 +5,7 @@
 import Inert from 'inert';
 import Vision from 'vision';
 import { graphqlHapi, graphiqlHapi } from 'apollo-server-hapi';
+import { formatError } from 'apollo-errors';
 import Good from 'good';
 import Pack from '../package.json';
 import Auth from './auth';
@@ -91,7 +92,8 @@ export default [
     options: {
       path: '/gql',
       graphqlOptions: {
-        schema
+        schema,
+        formatError
       },
       route: {
         cors: true
