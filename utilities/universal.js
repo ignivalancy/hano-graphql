@@ -4,7 +4,6 @@
 
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
-// import _ from 'underscore';
 import config from 'config';
 
 export const getTimeStamp = () => {
