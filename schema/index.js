@@ -26,7 +26,7 @@ const { typeDefs, resolvers } = mergeModules([
   accounts,
   categories,
   tasks,
-  indiecore,
+  indiecore
 ]);
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });

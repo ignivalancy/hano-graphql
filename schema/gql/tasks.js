@@ -34,7 +34,7 @@ export const resolvers = {
   Query: {
     tasks(root, args, context) {
       return Tasks.find({ created_by: 'admin' }).fetch();
-    },
+    }
   },
   Mutation: {
     async createTask(root, { title, cId }, context) {
@@ -45,7 +45,7 @@ export const resolvers = {
           complete: false,
           created_by: 'admin',
           created_at: new Date(),
-          updated_at: new Date(),
+          updated_at: new Date()
         };
         const _id = Tasks.insert(data);
         logger.log('subscribe', pubsub);
@@ -62,11 +62,11 @@ export const resolvers = {
         return { ...task, ...mods };
       }
       throw new Meteor.Error('mutation-denied', `task - not found`);
-    },
+    }
   },
   Subscription: {
     taskAdded: {
-      subscribe: () => pubsub.asyncIterator('taskAdded'),
+      subscribe: () => pubsub.asyncIterator('taskAdded')
       // resolve: (payload) => {
       //     return payload.taskAdded;
       // },
@@ -77,6 +77,6 @@ export const resolvers = {
       //         return true;
       //     }
       // )
-    },
-  },
+    }
+  }
 };

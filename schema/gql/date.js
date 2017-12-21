@@ -26,9 +26,9 @@ export const scalarType = {
       default:
         return null;
     }
-  },
+  }
 };
 
 export const resolvers = {
-  Date: scalarType,
+  Date: scalarType
 };

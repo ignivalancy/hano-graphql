@@ -28,7 +28,7 @@ export const resolvers = {
   Query: {
     me(root, args, context) {
       return context.user;
-    },
+    }
   },
   Mutation: {
     async updateProfile(root, args, { userId }) {
@@ -40,6 +40,6 @@ export const resolvers = {
       } else {
         throw new Meteor.Error('permission-denied', 'Insufficient rights for this action.');
       }
-    },
-  },
+    }
+  }
 };

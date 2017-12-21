@@ -37,9 +37,9 @@ export const scalarType = {
       default:
         return null;
     }
-  },
+  }
 };
 
 export const resolvers = {
-  JSON: scalarType,
+  JSON: scalarType
 };

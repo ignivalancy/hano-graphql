@@ -30,18 +30,18 @@ export const resolvers = {
     },
     category(root, { name }, context) {
       return Categories.findOne({ name: buildRegExp(name), created_by: 'admin' });
-    },
+    }
   },
   Mutation: {
     async createCategory(root, { name }, context) {
       const data = { name, created_by: 'admin', created_at: new Date(), updated_at: new Date() };
       const _id = Categories.insert(data);
       return { _id, ...data };
-    },
+    }
   },
   Category: {
     taskList({ _id }) {
       return Tasks.find({ cat_id: _id }).fetch();
-    },
-  },
+    }
+  }
 };

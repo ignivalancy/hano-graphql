@@ -39,18 +39,18 @@ export const resolvers = {
           longitude,
           latitude,
           sort,
-          offset,
-        },
+          offset
+        }
       });
 
       if (data.success) return data;
 
       throw new Meteor.Error('query-failed', data.error_text);
-    },
+    }
   },
   Business: {
     list({ places_list }) {
       return places_list;
-    },
-  },
+    }
+  }
 };

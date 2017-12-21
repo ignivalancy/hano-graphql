@@ -9,6 +9,6 @@ export const resolvers = {
   Query: {
     say(root, { something }, context) {
       return `hello ${something}`;
-    },
-  },
+    }
+  }
 };
