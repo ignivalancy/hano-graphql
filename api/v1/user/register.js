@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { registerUser } from '../../../controllers/user';
-import { failActionJoi } from '../../../utilities/rest';
 
 export default {
   method: 'POST',
@@ -105,8 +104,7 @@ export default {
         type: Joi.number()
           .required()
           .valid(1, 2) // 1 for web and 2 for app
-      },
-      failAction: failActionJoi
+      }
     }
   },
   handler: registerUser

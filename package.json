@@ -2,7 +2,6 @@
   "name": "hano",
   "version": "1.0.0",
   "description": "GraphQL, Hapi and Node Project For Scaleable Apps",
-  "url": "https://ignivalancy.github.io/hano-graphql",
   "engines": {
     "node": ">=8.9.0"
   },
@@ -75,9 +74,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "reinstall": "rm -rf node_modules && npm install",
     "precommit": "lint-staged",
-    "prettier":
+    "rp":
       "prettier --write \"**/*.json\" \"**/*.js\" \"config/**/*.json\" \"collections/**/*.js\" \"controllers/**/*.js\" \"plugins/**/*.js\" \"routes/**/*.js\" \"schema/**/*.js\" \"services/**/*.js\" \"utilities/**/*.js\""
   },
   "author": "Lancy Goyal",
+  "email": "i.lancygoyal@gmail.com",
+  "url": "https://lancygoyal.github.io",
   "license": "MIT"
 }

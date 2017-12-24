@@ -7,6 +7,7 @@ import Hapi from 'hapi';
 import config from 'config';
 import plugins from './plugins';
 import logger from './utilities/logger';
+import { failActionJoi } from './utilities/rest';
 
 const app = config.get('app');
 
@@ -19,6 +20,9 @@ export default async () => {
         origin: ['*'],
         additionalHeaders: ['authorization'],
         additionalExposedHeaders: ['authorization']
+      },
+      validate: {
+        failAction: failActionJoi
       }
     }
   });

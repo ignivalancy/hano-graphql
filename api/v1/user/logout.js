@@ -1,6 +1,5 @@
 import Joi from 'joi';
 import { logoutUser } from '../../../controllers/user';
-import { failActionJoi } from '../../../utilities/rest';
 
 export default {
   method: 'DELETE',
@@ -16,8 +15,7 @@ export default {
         authorization: Joi.string()
           .trim()
           .required()
-      }).options({ allowUnknown: true }),
-      failAction: failActionJoi
+      }).options({ allowUnknown: true })
     }
   },
   handler: logoutUser
