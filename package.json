@@ -42,11 +42,13 @@
     "nodemailer": "4.2.0",
     "nodemailer-smtp-transport": "2.7.4",
     "path": "^0.12.7",
+    "slugify": "^1.2.8",
     "socket.io": "2.0.4",
     "stripe": "5.1.1",
     "subscriptions-transport-ws": "^0.9.4",
     "twilio": "3.9.0",
     "underscore": "1.8.3",
+    "uuid": "^3.1.0",
     "vision": "^5.2.0"
   },
   "devDependencies": {

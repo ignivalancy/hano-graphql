@@ -26,7 +26,7 @@ npm start
     .
     ├── api                    # Rest api's folder
     │   ├── v1
-    │   |  └── user            # User routes
+    │   |  └── util            # Routes
     │   |  └── index.js
     ├── config                 # Config Folder
     ├── controllers            # Controllers Folder For Api's

@@ -9,11 +9,7 @@ import * as Universal from '../utilities/universal';
 // import logger from '../utilities/logger';
 
 export const register = async payload => {
-  if (await User.checkUserName(payload.username)) throw new Error(Messages.userNameAlreadyExists);
   if (await User.checkEmail(payload.email)) throw new Error(Messages.emailAlreadyExists);
-  if (await User.checkNumber(payload.phone)) throw new Error(Messages.contactAlreadyExists);
-
-  delete payload.type;
 
   payload = {
     ...payload,
@@ -23,10 +19,10 @@ export const register = async payload => {
 
   const data = await User.register(payload);
 
-  // const username = data.username.capitalizeEachLetter(),
+  // const username = data.fullName.capitalizeEachLetter(),
   //   link = `account-verification/${data.verified.token}`;
 
-  // const sendStr = Mail.formatHTML({ fileName: 'verifyEmail.html', username, link });
+  // const sendStr = Mail.formatHTML({ fileName: 'verifyEmail.html', fullName, link });
 
   // const emailData = {
   //   to: data.email,
@@ -42,18 +38,13 @@ export const register = async payload => {
   return {
     userId: data._id,
     role: data.role,
-    username: data.username,
-    email: data.email,
-    phone: data.phone
+    fullName: data.fullName,
+    email: data.email
   };
 };
 
 export const login = async payload => {
-  const userData = await User.login(
-    payload.uniqId,
-    Universal.encryptpassword(payload.password),
-    payload.type
-  );
+  const userData = await User.login(payload.email, Universal.encryptpassword(payload.password));
   if (!userData) throw new Error(Messages.invalidCredentials);
   // if (!userData.verified.status) throw new Error(Messages.userNotVerified);
 
@@ -69,9 +60,8 @@ export const login = async payload => {
   return {
     userId: data._id,
     role: data.role,
-    username: data.username,
+    fullName: data.fullName,
     email: data.email,
-    phone: data.phone,
     loginToken: data.loginToken[data.loginToken.length - 1].token,
     lastLogin: data.lastLogin
   };
