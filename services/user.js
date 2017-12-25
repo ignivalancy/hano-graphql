@@ -36,7 +36,7 @@ export const register = async payload => {
   // });
 
   return {
-    userId: data._id,
+    _id: data._id,
     role: data.role,
     fullName: data.fullName,
     email: data.email
@@ -58,7 +58,7 @@ export const login = async payload => {
   const data = await User.onLoginDone(userData._id, payload, loginToken);
 
   return {
-    userId: data._id,
+    _id: data._id,
     role: data.role,
     fullName: data.fullName,
     email: data.email,

@@ -1,27 +1,43 @@
+import { registerUser, loginUser, logoutUser } from '../../controllers/user';
+
 export const typeDefs = `
                 type User {
                   # Description for field
                   _id: String
-                  email: String
+                  fullName: String
+                  email: String!
+                  role: String!
+                  loginToken: String
+                  lastLogin: String
                 }
                 type Query {
                   me:User
                 }
                 type Mutation {
-                  updateProfile(
-                    name: String!
-                  ): SuccessResponse
-                }`;
+                  registerUser(
+                    fullName: String!
+                    email: String!
+                    password: String!
+                    role: String!
+                  ): User
+                  loginUser(
+                    email: String!
+                    password: String!
+                  ): User
+                  logoutUser: String!
+                }
+                `;
 
 export const resolvers = {
   Query: {
-    me(root, args, context) {
-      return context.user;
+    me(root, payload, context) {
+      if (context.auth.isAuthenticated) return context.auth.credentials.user;
+      throw new Error(context.auth.message);
     }
   },
   Mutation: {
-    async updateProfile(root, args, { userId }) {
-      return { success: true };
-    }
+    registerUser,
+    loginUser,
+    logoutUser
   }
 };

@@ -6,6 +6,7 @@ import Inert from 'inert';
 import Vision from 'vision';
 import { graphqlHapi, graphiqlHapi } from 'apollo-server-hapi';
 import { formatError } from 'apollo-errors';
+import { authentication } from '../utilities/rest';
 import Good from 'good';
 import Pack from '../package.json';
 import Auth from './auth';
@@ -91,10 +92,11 @@ export default [
     plugin: graphqlHapi,
     options: {
       path: '/gql',
-      graphqlOptions: {
+      graphqlOptions: async request => ({
+        context: { auth: await authentication(request.headers['authorization']) },
         schema,
         formatError
-      },
+      }),
       route: {
         cors: true
       }
@@ -109,7 +111,9 @@ export default [
     options: {
       path: '/graphiql',
       graphiqlOptions: {
-        endpointURL: '/gql'
+        endpointURL: '/gql',
+        passHeader:
+          "'Authorization': 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ3aGVuIjoxNTE0MjI1MDk5NDMyLCJyb2xlIjoidXNlciIsInVzZXJJZCI6IjVhNDEyZTQzNWI3YmJhMTcxODVjZTcxNyIsImlhdCI6MTUxNDIyNTA5OSwiZXhwIjoxNTIyMDAxMDk5fQ.vHktnwAxdxBh348S7R1x8BowxgYKPlaYyJY5D9Py2qTiS8uZ3FthMqtQ2m5o0sX3gxHzjdTSPqV59w29flO4dA'"
       }
     }
   }

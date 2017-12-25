@@ -8,9 +8,9 @@ import * as json from './gql/json';
 import * as hello from './gql/hello';
 import * as book from './gql/book';
 import * as indiecore from './gql/indiecore';
-// import * as user from './gql/user';
+import * as user from './gql/user';
 
-const { typeDefs, resolvers } = mergeModules([date, json, hello, book, indiecore]);
+const { typeDefs, resolvers } = mergeModules([date, json, hello, book, indiecore, user]);
 
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 

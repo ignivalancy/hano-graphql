@@ -11,6 +11,20 @@ import logger from './logger';
 
 const { jwtKey } = config.get('app');
 
+export const authentication = async token => {
+  let decoded = {};
+  try {
+    decoded = jwt.verify(token, jwtKey);
+  } catch (err) {
+    return { isAuthenticated: false, message: Messages.tokenExpired };
+  }
+  logger.info('authorization', decoded);
+  const user = await User.checkToken(token);
+  if (user)
+    return { isAuthenticated: true, credentials: { user, token }, message: Messages.tokenVerified };
+  else return { isAuthenticated: false, message: Messages.tokenExpired };
+};
+
 export const authorization = async (request, h) => {
   const token = request.headers['authorization'];
   let decoded = {};
@@ -22,7 +36,7 @@ export const authorization = async (request, h) => {
   logger.info('authorization', decoded);
   const user = await User.checkToken(token);
   if (user) return h.authenticated({ credentials: { user, token } });
-  else throw Boom.unauthorized(Messages.unauthorizedUser);
+  else throw Boom.unauthorized(Messages.tokenExpired);
 };
 
 export const successAction = (data, message = 'OK') => ({

@@ -7,31 +7,29 @@ import { failAction, successAction } from '../utilities/rest';
 import Messages from '../utilities/messages';
 // import logger from '../utilities/logger';
 
-export const registerUser = async (request, h) => {
-  const { payload } = request;
+export const registerUser = async (root, payload, context) => {
   try {
-    const data = await register(payload);
-    return successAction(data, Messages.registerSuccess);
+    return await register(payload);
   } catch (error) {
     failAction(error.message);
   }
 };
 
-export const loginUser = async (request, h) => {
-  const { payload } = request;
+export const loginUser = async (root, payload, context) => {
   try {
-    const data = await login(payload);
-    return successAction(data, Messages.loginSuccessfull);
+    return await login(payload);
   } catch (error) {
     failAction(error.message);
   }
 };
 
-export const logoutUser = async (request, h) => {
-  const { auth: { credentials: { user, token } } } = request;
+export const logoutUser = async (root, payload, context) => {
+  const { auth: { isAuthenticated, message } } = context;
   try {
+    if (!isAuthenticated) return message;
+    const { auth: { credentials: { user, token } } } = context;
     await logout({ user, token });
-    return successAction(null, Messages.logoutSuccessfull);
+    return Messages.logoutSuccessfull;
   } catch (error) {
     failAction(error.message);
   }
