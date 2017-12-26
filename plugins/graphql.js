@@ -54,8 +54,6 @@ export default {
         }
       });
 
-    console.log(plugins)
-
     // setup graphql server
     await server.register(plugins);
 
@@ -74,14 +72,14 @@ export default {
         onConnect: async ({ token }, webSocket) => {
           logger.info('+++ Subscription Connected');
 
-          // if a login token is passed to the connection params from the client,
-          // add the current user to the subscription context
-
           // const userContext = authContext(token);
+
           // if (userContext.isAuthenticated) {
           //   return { ...userContext };
           // }
+
           // throw new Error(userContext.message);
+
           return;
         },
         onDisconnect: webSocket => {

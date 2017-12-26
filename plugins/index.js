@@ -95,7 +95,7 @@ export default [
       graphiql: app.debug, // isDevelopment
       graphiqlOptions: {
         passHeader:
-          "'Authorization': 'TOKEN'"
+          "'Authorization': 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ3aGVuIjoxNTE0MjY5Mjk5NDEzLCJyb2xlIjoidXNlciIsImxhc3RMb2dpbiI6MTUxNDI2MDg1MDAwNiwidXNlcklkIjoiNWE0MWM5NTcyN2FmYjQwNmU3MzRlZTBiIiwiaWF0IjoxNTE0MjY5Mjk5LCJleHAiOjE1MjIwNDUyOTl9.VIyV8WcU_6E3cLW29913WkQk7xpoGkGCI4Qv8tmwsYwgMMCkWauROouo9KUZgBESmu74I9LhLSNU9hUGhm0DBg'"
       }
     }
   }

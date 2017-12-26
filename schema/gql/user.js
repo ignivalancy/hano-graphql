@@ -26,10 +26,10 @@ export const typeDefs = `
                     password: String!
                   ): User
                   logoutUser: String!
-                  newUser: User!
+                  newUser: String!
                 }
                 type Subscription {
-                  newUser: User
+                  newUser: String
                 }
                 `;
 
@@ -45,10 +45,8 @@ export const resolvers = {
     loginUser,
     logoutUser,
     newUser(root, payload, context) {
-      console.dir(pubsub);
-      pubsub.publish('something_changed', { newUser: context.auth.credentials.user });
-      if (context.auth.isAuthenticated) return context.auth.credentials.user;
-      throw new Error(context.auth.message);
+      pubsub.publish('something_changed', { newUser: 'newUser' });
+      return 'newUser';
     }
   },
   Subscription: {
