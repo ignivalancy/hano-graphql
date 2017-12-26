@@ -52,9 +52,9 @@ export const resolvers = {
   Subscription: {
     newUser: {
       subscribe: () => pubsub.asyncIterator('something_changed'),
-      resolve: (payload) => {
+      resolve: payload => {
         return payload.newUser;
-      },
+      }
       // subscribe: withFilter(
       //     () => pubsub.asyncIterator('newUser'),
       //     (root, args, context) => {
