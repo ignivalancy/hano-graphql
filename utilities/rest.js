@@ -11,7 +11,8 @@ import logger from './logger';
 
 const { jwtKey } = config.get('app');
 
-export const authentication = async token => {
+export const authentication = async request => {
+  const token = request.headers['authorization'];
   let decoded = {};
   try {
     decoded = jwt.verify(token, jwtKey);
@@ -19,8 +20,16 @@ export const authentication = async token => {
     return { isAuthenticated: false, message: Messages.tokenExpired };
   }
   logger.info('authorization', decoded);
-  const user = await User.checkToken(token);
-  if (user)
+  const data = await User.checkToken(token);
+  const user = {
+    _id: data._id,
+    role: data.role,
+    fullName: data.fullName,
+    email: data.email,
+    loginToken: data.loginToken[data.loginToken.length - 1].token,
+    lastLogin: data.lastLogin
+  };
+  if (data)
     return { isAuthenticated: true, credentials: { user, token }, message: Messages.tokenVerified };
   else return { isAuthenticated: false, message: Messages.tokenExpired };
 };

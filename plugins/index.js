@@ -62,7 +62,7 @@ export default [
   },
 
   /* ---------------------------
-        Setting up the jwt authentication.
+        Setting up the jwt auth.
       ---------------------------- */
   {
     plugin: Auth,
@@ -93,7 +93,7 @@ export default [
     options: {
       path: '/gql',
       graphqlOptions: async request => ({
-        context: { auth: await authentication(request.headers['authorization']) },
+        context: { auth: await authentication(request) },
         schema,
         formatError
       }),
@@ -113,7 +113,7 @@ export default [
       graphiqlOptions: {
         endpointURL: '/gql',
         passHeader:
-          "'Authorization': 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ3aGVuIjoxNTE0MjI1MDk5NDMyLCJyb2xlIjoidXNlciIsInVzZXJJZCI6IjVhNDEyZTQzNWI3YmJhMTcxODVjZTcxNyIsImlhdCI6MTUxNDIyNTA5OSwiZXhwIjoxNTIyMDAxMDk5fQ.vHktnwAxdxBh348S7R1x8BowxgYKPlaYyJY5D9Py2qTiS8uZ3FthMqtQ2m5o0sX3gxHzjdTSPqV59w29flO4dA'"
+          "'Authorization': 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ3aGVuIjoxNTE0MjYwODUwMDA0LCJyb2xlIjoidXNlciIsInVzZXJJZCI6IjVhNDFjOTU3MjdhZmI0MDZlNzM0ZWUwYiIsImlhdCI6MTUxNDI2MDg1MCwiZXhwIjoxNTIyMDM2ODUwfQ.jCW6DWx79BSAJRHvMt8RjOdF4p5E9INUAkMeb5E8xjkW1GPs-7Kq3w5OW9sB9urGRmoAdPivAp9VHAN8NZnAQQ'"
       }
     }
   }
