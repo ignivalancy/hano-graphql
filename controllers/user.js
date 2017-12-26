@@ -26,7 +26,7 @@ export const loginUser = async (root, payload, context) => {
 export const logoutUser = async (root, payload, context) => {
   const { auth: { isAuthenticated, message } } = context;
   try {
-    if (!isAuthenticated) return message;
+    if (!isAuthenticated) throw new Error(message);
     const { auth: { credentials: { user, token } } } = context;
     await logout({ user, token });
     return Messages.logoutSuccessfull;
