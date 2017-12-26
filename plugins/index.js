@@ -4,15 +4,15 @@
 
 import Inert from 'inert';
 import Vision from 'vision';
-import { graphqlHapi, graphiqlHapi } from 'apollo-server-hapi';
-import { formatError } from 'apollo-errors';
-import { authContext } from '../utilities/rest';
 import Good from 'good';
+import config from 'config';
 import Pack from '../package.json';
 import Auth from './auth';
 import Rest from './rest';
 import Main from './main';
-import schema from '../schema';
+import Graphql from './graphql';
+
+const app = config.get('app');
 
 /**
  * exports array of plugins with configuration.
@@ -89,31 +89,13 @@ export default [
         Init the Graphql Server.
       ---------------------------- */
   {
-    plugin: graphqlHapi,
+    plugin: Graphql,
     options: {
       path: '/gql',
-      graphqlOptions: async request => ({
-        context: { auth: await authContext(request) },
-        schema,
-        formatError
-      }),
-      route: {
-        cors: true
-      }
-    }
-  },
-
-  /* ---------------------------
-        Init the Graphiql.
-      ---------------------------- */
-  {
-    plugin: graphiqlHapi,
-    options: {
-      path: '/graphiql',
+      graphiql: app.debug, // isDevelopment
       graphiqlOptions: {
-        endpointURL: '/gql',
         passHeader:
-          "'Authorization': 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJ3aGVuIjoxNTE0MjYwODUwMDA0LCJyb2xlIjoidXNlciIsInVzZXJJZCI6IjVhNDFjOTU3MjdhZmI0MDZlNzM0ZWUwYiIsImlhdCI6MTUxNDI2MDg1MCwiZXhwIjoxNTIyMDM2ODUwfQ.jCW6DWx79BSAJRHvMt8RjOdF4p5E9INUAkMeb5E8xjkW1GPs-7Kq3w5OW9sB9urGRmoAdPivAp9VHAN8NZnAQQ'"
+          "'Authorization': 'TOKEN'"
       }
     }
   }
