@@ -63,12 +63,6 @@ export default {
         execute,
         subscribe,
         schema,
-        // onOperation: (message, params, webSocket) => {
-        //     logger.log('onOperation');
-        // },
-        // onOperationComplete: (webSocket, opId) => {
-        //     logger.log('onOperationComplete');
-        // },
         onConnect: async ({ token }, webSocket) => {
           logger.info('+++ Subscription Connected');
 
