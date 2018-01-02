@@ -1,5 +1,9 @@
+import { withFilter } from 'graphql-subscriptions';
 import { registerUser, loginUser, logoutUser } from '../../controllers/user';
 import pubsub from '../../utilities/subscriptions';
+import logger from '../../utilities/logger';
+
+const SOMETHING_CHANGED_TOPIC = 'something_changed';
 
 export const typeDefs = `
                 type User {
@@ -45,23 +49,23 @@ export const resolvers = {
     loginUser,
     logoutUser,
     newUser(root, payload, context) {
-      pubsub.publish('something_changed', { newUser: 'newUser' });
-      return 'newUser';
+      pubsub.publish(SOMETHING_CHANGED_TOPIC, { newUser: 'Dev' });
+      return 'Dev';
     }
   },
   Subscription: {
     newUser: {
-      subscribe: () => pubsub.asyncIterator('something_changed'),
-      resolve: payload => {
-        return payload.newUser;
-      }
-      // subscribe: withFilter(
-      //     () => pubsub.asyncIterator('newUser'),
-      //     (root, args, context) => {
-      //         logger.log('newUser subscribe', args, context);
-      //         return true;
-      //     }
-      // )
+      // subscribe: () => pubsub.asyncIterator('something_changed'),
+      // resolve: payload => {
+      //   return payload.newUser;
+      // },
+      subscribe: withFilter(
+        () => pubsub.asyncIterator(SOMETHING_CHANGED_TOPIC),
+        (root, args, context) => {
+          logger.info('newUser', context);
+          return true;
+        }
+      )
     }
   }
 };
