@@ -59,7 +59,6 @@ export const failAction = errorMessage => {
 };
 
 export const failActionJoi = (request, h, error) => {
-  console.log(request);
   let errorMessage = '';
   if (error.output.payload.message.indexOf('[') > -1) {
     errorMessage = error.output.payload.message.substr(error.output.payload.message.indexOf('['));

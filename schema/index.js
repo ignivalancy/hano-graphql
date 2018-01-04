@@ -1,5 +1,5 @@
 import { makeExecutableSchema } from 'graphql-tools';
-import { mergeModules, loadModules } from 'graphql-schema-modules';
+import { mergeModules } from 'graphql-schema-modules';
 
 // **** Custom Scalar
 import * as date from './gql/date';

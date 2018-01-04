@@ -23,7 +23,7 @@
     "boom": "^6.0.0",
     "config": "1.26.2",
     "fcm-node": "1.2.0",
-    "good": "https://github.com/corbinu/good.git",
+    "good": "^8.0.0-rc1",
     "good-console": "^6.4.0",
     "good-squeeze": "^5.0.2",
     "graphql": "^0.11.7",
@@ -74,10 +74,10 @@
   "scripts": {
     "start": "nodemon --exec babel-node -- main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "reinstall": "rm -rf node_modules && npm install",
-    "precommit": "lint-staged",
-    "rp":
-      "prettier --write \"**/*.json\" \"**/*.js\" \"config/**/*.json\" \"collections/**/*.js\" \"controllers/**/*.js\" \"plugins/**/*.js\" \"routes/**/*.js\" \"schema/**/*.js\" \"services/**/*.js\" \"utilities/**/*.js\""
+    "ri": "rm -rf node_modules && npm install",
+    "lint": "./node_modules/.bin/eslint . --ext .js",
+    "rp": "prettier --write \"**/*.json\" \"**/*.js\"",
+    "precommit": "npm run rp && lint-staged"
   },
   "author": "Lancy Goyal",
   "email": "i.lancygoyal@gmail.com",

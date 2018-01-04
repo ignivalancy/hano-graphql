@@ -6,7 +6,7 @@ import Inert from 'inert';
 import Vision from 'vision';
 import Good from 'good';
 import config from 'config';
-import Pack from '../package.json';
+// import Pack from '../package.json';
 import Auth from './auth';
 import Rest from './rest';
 import Main from './main';

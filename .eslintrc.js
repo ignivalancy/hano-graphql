@@ -12,9 +12,8 @@ module.exports = {
   rules: {
     indent: [2, 2],
     'linebreak-style': [2, 'unix'],
-    quotes: [2, 'single'],
+    quotes: [1, 'single'],
     semi: [2, 'always'],
-    'prettier/prettier': [2, null, '@prettier'],
-    properties: [1, 'always']
+    'prettier/prettier': [2, null, '@prettier']
   }
 };

@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { Kind } from 'graphql/language';
 
 export const typeDefs = `
