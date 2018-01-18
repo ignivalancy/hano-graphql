@@ -57,8 +57,8 @@ typings/
 # dotenv environment variables file
 .env
 
-# assets directories
+# assets directory
 assets
 
-# build directories
+# build directory
 dist
