@@ -12,6 +12,7 @@
   "db": {
     "name": "hano",
     "host": "127.0.0.1",
+    "auth": false,
     "username": "",
     "password": "",
     "port": 27017,

@@ -12,7 +12,10 @@ const db = config.get('db');
 
 export default async () => {
   // Build the connection string.
-  const mongoUrl = 'mongodb://' + db.host + ':' + db.port + '/' + db.name;
+
+  const mongoUrl = db.auth
+    ? `mongodb://${db.username}:${db.password}@${db.host}:${db.port}/${db.name}`
+    : `mongodb://${db.host}:${db.port}/${db.name}`;
 
   Mongoose.Promise = Bluebird;
 
